@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.ManageImages">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="ManageImages" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="manage_id" property="manageId" jdbcType="INTEGER" />
+		<result column="image_id" property="imageId" jdbcType="INTEGER" />
+		
+		
+		
+		<result column="omanageId" property="omanageId" jdbcType="INTEGER" />
+		<result column="title" property="title" jdbcType="VARCHAR" />
+		<result column="subtitle" property="subtitle" jdbcType="VARCHAR" />
+		<result column="operatorId" property="operatorId" jdbcType="INTEGER" />
+		<result column="operator" property="operator" jdbcType="VARCHAR" />
+		<result column="comment" property="comment" jdbcType="VARCHAR" />
+		<result column="content" property="content" jdbcType="VARCHAR" />
+		<result column="source" property="source" jdbcType="VARCHAR" />
+		<result column="type" property="type" jdbcType="INTEGER" />
+		<result column="status" property="status" jdbcType="INTEGER" />
+		<result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+		
+		
+		<result column="url" property="url" jdbcType="VARCHAR" />
+		<result column="did" property="did" jdbcType="INTEGER" />
+		<result column="name" property="name" jdbcType="VARCHAR" />
+		<result column="isDel" property="isDel" jdbcType="INTEGER" />
+		
+	</resultMap>
+	<!--查询全部列  -->
+	<sql id="Base_Column_List">
+		id,
+		manage_id,
+		image_id
+	</sql>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="ManageImages"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_manage_images (id,manage_id,image_id) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{manageId,jdbcType=INTEGER}, 
+	      #{imageId,jdbcType=INTEGER}
+      	)
+	</insert>
+	
+	<select id="findUrlByManageId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select m.id,m.manage_id,m.image_id,o.manage_id as omanageId,o.title,o.subtitle,o.operatorId,o.operator,o.content,o.comment,o.type,o.source,o.status,o.create_time as
+    createTime,o.update_time as updateTime,i.url,i.id as did,i.name,i.isDel from tb_manage_images  m LEFT JOIN tb_others_manage o ON o.manage_id = m.manage_id LEFT JOIN tb_image_detail i on m.image_id = i.id
+    where m.manage_id = #{manageId,jdbcType=INTEGER} and i.isDel = 0;
+  </select>
+  
+	
+</mapper>

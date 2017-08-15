@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.AdminRole">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="AdminRole" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="isDel" property="isDel" jdbcType="INTEGER" />
+		<result column="creatorId" property="creatorId" jdbcType="INTEGER" />
+	    <result column="creator" property="creator" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="operatorId" property="operatorId" jdbcType="INTEGER" />
+	    <result column="operator" property="operator" jdbcType="VARCHAR" />
+	    <result column="operateTime" property="operateTime" jdbcType="TIMESTAMP" />
+	    <result column="adminId" property="adminId" jdbcType="INTEGER" />
+	    <result column="roleId" property="roleId" jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 部分列 -->
+	<resultMap id="BaseResultMapType0" type="AdminRole" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="adminId" property="adminId" jdbcType="INTEGER" />
+	    <result column="roleId" property="roleId" jdbcType="INTEGER" />
+	</resultMap>
+	<!--查询全部列  -->
+	<sql id="Base_Column_List">
+		id,
+		isDel,
+		creatorId,
+		creator,
+		createTime,
+		operatorId,
+		operator,
+		operateTime,
+		adminId,
+		roleId
+	</sql>
+	<!--查询列参数  -->
+	<sql id="queryMap">
+		<if test="id != null">
+			and id = #{id,jdbcType=INTEGER}
+		</if>
+		<if test="isDel != null">
+			and isDel = #{isDel,jdbcType=INTEGER}
+		</if>
+		<if test="creatorId != null">
+			and creatorId = #{creatorId,jdbcType=INTEGER}
+		</if>
+		<if test="creator != null">
+			and creator = #{creator,jdbcType=VARCHAR}
+		</if>
+		<if test="createTimeStart !=null and createTimeStart != ''">
+    		<![CDATA[and DATE_FORMAT(createTime, '%Y-%m-%d') >=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="createTimeEnd !=null and createTimeEnd != ''">
+    		<![CDATA[and DATE_FORMAT(createTime, '%Y-%m-%d') <=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="operatorId != null">
+			and operatorId = #{operatorId,jdbcType=INTEGER}
+		</if>
+		<if test="operator != null">
+			and operator = #{operator,jdbcType=INTEGER}
+		</if>
+		<if test="operateTimeStart !=null and operateTimeStart != ''">
+    		<![CDATA[and DATE_FORMAT(operateTime, '%Y-%m-%d') >=  DATE_FORMAT(#{operateTimeStart}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="operateTimeEnd !=null and operateTimeEnd != ''">
+    		<![CDATA[and DATE_FORMAT(operateTime, '%Y-%m-%d') <=  DATE_FORMAT(#{operateTimeEnd}, '%Y-%m-%d')]]>
+    	</if>
+		<if test="adminId != null">
+			and adminId = #{adminId,jdbcType=INTEGER}
+		</if>
+		<if test="roleId != null">
+			and roleId = #{roleId,jdbcType=INTEGER}
+		</if>
+    </sql>
+    <!--更新列参数  -->
+    <sql id="updateMap">
+    	<if test="isDel != null">
+			isDel = #{isDel,jdbcType=INTEGER},
+		</if>
+		<if test="operatorId != null">
+			operatorId = #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operator != null">
+			operator = #{operator,jdbcType=VARCHAR},
+		</if>
+		<if test="operateTime != null">
+			operateTime = #{operateTime,jdbcType=TIMESTAMP},
+		</if>
+    	<if test="password != null">
+			password = #{password,jdbcType=VARCHAR},
+		</if>
+		<if test="adminId != null">
+			adminId = #{adminId,jdbcType=INTEGER},
+		</if>
+		<if test="roleId != null">
+			roleId = #{roleId,jdbcType=INTEGER},
+		</if>
+    </sql>
+    <!-- 总记录数 -->
+    <select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_admin_role
+		where 1 = 1
+		<include refid="queryMap"/>
+		order by id desc
+	</select>
+	<!-- 查询列表 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_admin_role
+		where  1 = 1
+		<include refid="queryMap"/>
+		order by id desc
+		limit   #{startIndex,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_admin_role
+		where 1 = 1
+		order by id asc
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAllWithMap" parameterType="map"  resultMap="BaseResultMap">
+		select
+	    <include refid="Base_Column_List" />
+		from tb_admin_role
+		where 1=1
+		<include refid="queryMap"/>
+		order by id asc
+	</select>
+	<!--查询一个  -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_admin_role
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="AdminRole"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_admin_role (<include refid="Base_Column_List" />) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{isDel,jdbcType=INTEGER}, 
+	      #{creatorId,jdbcType=INTEGER}, 
+	      #{creator,jdbcType=VARCHAR}, 
+	      #{createTime,jdbcType=TIMESTAMP},
+	      #{operatorId,jdbcType=INTEGER},
+	      #{operator,jdbcType=VARCHAR},
+	      #{operateTime,jdbcType=TIMESTAMP},
+	      #{adminId,jdbcType=INTEGER},
+	      #{roleId,jdbcType=INTEGER}
+      	)
+	</insert>
+	<!-- 更新-->
+	<update id="update" parameterType="AdminRole">
+		update tb_admin_role
+	    <set>
+	      <include refid="updateMap"/>
+	    </set>
+	    	where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from tb_admin_role
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 删除 -->
+	<delete id="deleteByAdminId" parameterType="java.lang.Integer">
+		delete from tb_admin_role where 
+		adminId = #{adminId,jdbcType=INTEGER}
+	</delete>
+	<!-- 账号密码精确匹配 -->
+	<select id="existsEntity" parameterType="map"  resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_admin_role
+		where  1 = 1
+		<if test="adminId != null">
+			and adminId = #{adminId,jdbcType=INTEGER}
+		</if>
+		<if test="roleId != null">
+			and roleId = #{roleId,jdbcType=VARCHAR}
+		</if>
+		order by id desc
+	</select>
+	
+</mapper>

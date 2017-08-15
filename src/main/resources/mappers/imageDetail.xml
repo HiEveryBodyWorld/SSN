@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.ImagesDetail">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="ImagesDetail" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="isDel" property="isDel" jdbcType="INTEGER" />
+	</resultMap>
+	<!--查询全部列  -->
+	<sql id="Base_Column_List">
+		id,
+		name,
+		url,
+		isDel
+	</sql>
+    <!-- 总记录数 -->
+    <select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_image_detail
+		where 1 = 1
+		order by id desc
+	</select>
+	<!-- 查询列表 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_image_detail
+		where  1 = 1
+		order by id desc
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_image_detail
+		where 1 = 1
+		order by id asc
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAllWithMap" parameterType="map"  resultMap="BaseResultMap">
+		select
+	    <include refid="Base_Column_List" />
+		from tb_image_detail
+		where 1=1
+		order by id asc
+	</select>
+	<!--查询一个  -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_image_detail
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<select id="findListById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_image_detail
+		where id in(select image_id from tb_upload_images where upload_id=#{id,jdbcType=INTEGER} and isDel=0)
+	</select>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="ImagesDetail"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_image_detail (<include refid="Base_Column_List" />) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{name,jdbcType=VARCHAR}, 
+	      #{url,jdbcType=VARCHAR},
+	      0
+      	)
+	</insert>
+	<!-- 更新-->
+	<update id="update" parameterType="ImagesDetail">
+		update tb_image_detail
+	    <set>
+	      <if test="isDel != null">
+			isDel = #{isDel,jdbcType=INTEGER}
+		  </if>
+	    </set>
+	    	where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from tb_image_detail where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+</mapper>

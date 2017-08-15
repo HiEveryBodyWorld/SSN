@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.news.entity.Admin" alias="Admin"/>
+        <typeAlias type="com.news.entity.AdminRole" alias="AdminRole"/>
+        <typeAlias type="com.news.entity.Resources" alias="Resources"/>
+        <typeAlias type="com.news.entity.Role" alias="Role"/>
+        <typeAlias type="com.news.entity.RoleResources" alias="RoleResources"/>
+        <typeAlias type="com.news.entity.Images" alias="Images"/>
+        <typeAlias type="com.news.entity.ImagesDetail" alias="ImagesDetail"/>
+        <typeAlias type="com.news.entity.UploadImages" alias="UploadImages"/>
+        <typeAlias type="com.news.entity.OthersManage" alias="OthersManage"/>
+        <typeAlias type="com.news.entity.ManageImages" alias="ManageImages"/>
+    </typeAliases>
+    <mappers>
+        <mapper resource="mappers/admin.xml" />
+        <mapper resource="mappers/adminRole.xml" />
+        <mapper resource="mappers/resources.xml" />
+        <mapper resource="mappers/role.xml" />
+        <mapper resource="mappers/roleResources.xml" />
+        <mapper resource="mappers/images.xml" />
+        <mapper resource="mappers/imageDetail.xml" />
+        <mapper resource="mappers/uploadImages.xml" />
+        <mapper resource="mappers/othersManage.xml" />
+        <mapper resource="mappers/manageImages.xml" />
+    </mappers>
+</configuration>

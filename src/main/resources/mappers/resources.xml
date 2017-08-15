@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.Resources">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="Resources" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="isDel" property="isDel" jdbcType="INTEGER" />
+		<result column="creatorId" property="creatorId" jdbcType="INTEGER" />
+	    <result column="creator" property="creator" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="operatorId" property="operatorId" jdbcType="INTEGER" />
+	    <result column="operator" property="operator" jdbcType="VARCHAR" />
+	    <result column="operateTime" property="operateTime" jdbcType="TIMESTAMP" />
+	    
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="pId" property="pId" jdbcType="INTEGER" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+	    <result column="sortNum" property="sortNum" jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 部分列 -->
+	<resultMap id="BaseResultMapType0" type="Resources" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="pId" property="pId" jdbcType="INTEGER" />
+	    <result column="type" property="type" jdbcType="INTEGER" />
+	    <result column="sortNum" property="sortNum" jdbcType="INTEGER" />
+	</resultMap>
+	<!--全部查询列  -->
+	<sql id="Base_Column_List">
+		id,
+		isDel,
+		creatorId,
+		creator,
+		createTime,
+		operatorId,
+		operator,
+		operateTime,
+		name,
+		url,
+		pId,
+		type,
+		sortNum
+	</sql>
+	<!--查询列参数  -->
+	<sql id="queryMap">
+		<if test="id != null">
+			and id = #{id,jdbcType=INTEGER}
+		</if>
+    	<if test="name != null">
+			and name like concat('%', #{name}, '%')
+		</if>
+		<if test="type != null and type != -1">
+			and type=#{type,jdbcType=INTEGER}
+		</if>
+		<if test="createTimeStart !=null and createTimeStart != ''">
+    		<![CDATA[and DATE_FORMAT(createTime, '%Y-%m-%d') >=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="createTimeEnd !=null and createTimeEnd != ''">
+    		<![CDATA[and DATE_FORMAT(createTime, '%Y-%m-%d') <=  DATE_FORMAT(#{createTimeStart}, '%Y-%m-%d')]]>
+    	</if>
+    </sql>
+    <!--更新列参数  -->
+    <sql id="updateMap">
+    	<if test="isDel != null">
+			isDel = #{isDel,jdbcType=INTEGER},
+		</if>
+		<if test="operatorId != null">
+			operatorId = #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operator != null">
+			operator = #{operator,jdbcType=VARCHAR},
+		</if>
+		<if test="operateTime != null">
+			operateTime = #{operateTime,jdbcType=TIMESTAMP},
+		</if>
+    	<if test="name != null">
+			name = #{name,jdbcType=VARCHAR},
+		</if>
+		<if test="url != null">
+			url = #{url,jdbcType=INTEGER},
+		</if>
+		<if test="type != null">
+			type = #{type,jdbcType=INTEGER},
+		</if>
+		<if test="pId != null">
+			pId = #{pId,jdbcType=INTEGER},
+		</if>
+		<if test="sortNum != null">
+			sortNum = #{sortNum,jdbcType=INTEGER},
+		</if>
+    </sql>
+    <!-- 总记录数 -->
+    <select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_resources
+		where 1 = 1
+		<include refid="queryMap"/>
+		order by id desc
+	</select>
+	<!-- 分页查询 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_resources
+		where  1 = 1
+		<include refid="queryMap"/>
+		order by id desc
+		limit   #{startIndex,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_resources
+		where 1 = 1
+		order by id asc
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAllWithMap" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_resources
+		where 1=1
+		<include refid="queryMap"/>
+		order by id asc
+	</select>
+	<!--查询一个  -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_resources
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Resources"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_resources 
+		(<include refid="Base_Column_List" />)
+		values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{isDel,jdbcType=INTEGER}, 
+	      #{creatorId,jdbcType=INTEGER}, 
+	      #{creator,jdbcType=VARCHAR}, 
+	      #{createTime,jdbcType=TIMESTAMP},
+	      #{operatorId,jdbcType=INTEGER},
+	      #{operator,jdbcType=VARCHAR},
+	      #{operateTime,jdbcType=TIMESTAMP},
+	      #{name,jdbcType=VARCHAR}, 
+	      #{url,jdbcType=INTEGER},
+	      #{pId,jdbcType=INTEGER},
+	      #{type,jdbcType=INTEGER},
+	      #{sortNum,jdbcType=INTEGER}
+      	)
+	</insert>
+	<!-- 更新-->
+	<update id="update" parameterType="Resources">
+		update tb_resources
+    <set>
+      <include refid="updateMap"/>
+    </set>
+    	where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from tb_resources
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<!-- 查询菜单类型资源 -->
+	<select id="findListType0" resultMap="BaseResultMapType0">
+		select 
+		id,name,url,pId,sortNum
+		from tb_resources
+		where  1 = 1
+		and type = 0
+		order by sortNum asc
+	</select>
+	<!-- 查询动作类型资源 -->
+	<select id="findListType1" resultMap="BaseResultMapType0">
+		select 
+		id,name,url,pId,sortNum
+		from tb_resources
+		where  1 = 1
+		and type = 1
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListByIds" parameterType="list" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_resources
+		where 1=1 
+		and id in
+		<foreach collection="list" item= "item" index ="index" open= "(" close =")" separator=",">
+            #{item}
+       </foreach>
+		order by id desc
+	</select>
+	
+</mapper>

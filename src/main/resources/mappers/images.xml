@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.Images">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="Images" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="isDel" property="isDel" jdbcType="INTEGER" />
+		<result column="creatorId" property="creatorId" jdbcType="INTEGER" />
+	    <result column="creator" property="creator" jdbcType="VARCHAR" />
+	    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="operatorId" property="operatorId" jdbcType="INTEGER" />
+	    <result column="operator" property="operator" jdbcType="VARCHAR" />
+	    <result column="operateTime" property="operateTime" jdbcType="TIMESTAMP" />
+	    <result column="description" property="description" jdbcType="VARCHAR" />
+	    <result column="url" property="url" jdbcType="VARCHAR" />
+	    <result column="name" property="name" jdbcType="VARCHAR" />
+	    <result column="spaceId" property="spaceId" jdbcType="VARCHAR" />
+	</resultMap>
+	<!--查询全部列  -->
+	<sql id="Base_Column_List">
+		id,
+		isDel,
+		creatorId,
+		creator,
+		createTime,
+		operatorId,
+		operator,
+		operateTime,
+		description,
+		spaceId
+	</sql>
+	<sql id="queryMap">
+		<if test="startDate !=null and startDate != ''">
+    		<![CDATA[and DATE_FORMAT(temp.createTime, '%Y-%m-%d') >=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="endDate !=null and endDate != ''">
+    		<![CDATA[and DATE_FORMAT(temp.createTime, '%Y-%m-%d') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="description != null">
+			and temp.description like concat('%', #{description,jdbcType=VARCHAR}, '%')
+		</if>
+		<if test="spaceId != null">
+	        and temp.spaceId = #{spaceId,jdbcType=INTEGER}
+		</if>
+    </sql>
+    <!--更新列参数  -->
+    <sql id="updateMap">
+    	<if test="isDel != null">
+			isDel = #{isDel,jdbcType=INTEGER},
+		</if>
+		<if test="operatorId != null">
+			operatorId = #{operatorId,jdbcType=INTEGER},
+		</if>
+		<if test="operator != null">
+			operator = #{operator,jdbcType=VARCHAR},
+		</if>
+		<if test="operateTime != null">
+			operateTime = #{operateTime,jdbcType=TIMESTAMP},
+		</if>
+		<if test="description != null">
+			description = #{description,jdbcType=VARCHAR},
+		</if>
+    </sql>
+    <!-- 总记录数 -->
+    <select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_upload
+		where 1 = 1
+		order by id desc
+	</select>
+	<!-- 查询列表 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select temp.*,url,name from(select ui.image_id,up.* from tb_upload up left join tb_upload_images ui on up.id=ui.upload_id where isDel=0)as temp  left join tb_image_detail im on temp.image_id=im.id where im.isDel=0 <include refid="queryMap"/> group by id
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAll" resultMap="BaseResultMap">
+		select temp.*,url,name from(select ui.image_id,up.* from tb_upload up left join tb_upload_images ui on up.id=ui.upload_id)as temp  left join tb_image_detail im on temp.image_id=im.id group by id
+	</select>
+	<!-- 查询所有 -->
+	<select id="findListAllWithMap" parameterType="map"  resultMap="BaseResultMap">
+		select
+	    <include refid="Base_Column_List" />
+		from tb_upload
+		where 1=1
+		<!-- <include refid="queryMap"/> -->
+		order by id asc
+	</select>
+	<!--查询一个  -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_upload
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Images"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_upload (<include refid="Base_Column_List" />) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      0, 
+	      #{creatorId,jdbcType=INTEGER}, 
+	      #{creator,jdbcType=VARCHAR}, 
+	      #{createTime,jdbcType=TIMESTAMP},
+	      #{operatorId,jdbcType=INTEGER},
+	      #{operator,jdbcType=VARCHAR},
+	      #{operateTime,jdbcType=TIMESTAMP},
+	      #{description,jdbcType=VARCHAR},
+	      #{spaceId,jdbcType=INTEGER}
+      	)
+	</insert>
+	<!-- 更新-->
+	<update id="update" parameterType="Images">
+		update tb_upload
+	    <set>
+	      <include refid="updateMap"/>
+	    </set>
+	    	where id = #{id,jdbcType=INTEGER}
+	</update>
+	<!-- 删除 -->
+	<delete id="delete" parameterType="java.lang.Integer">
+		delete from tb_upload where id = #{id,jdbcType=INTEGER}
+	</delete>
+	
+</mapper>

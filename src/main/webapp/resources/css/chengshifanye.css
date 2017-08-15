@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/* CSS Document */
+
+.div1,.div2,.div3{
+	display:none;
+	margin-bottom: 12px;
+	border-bottom: 1px solid #bcbcbc;
+
+	}
+.div1{
+	width:342px;
+	height:700px;
+	
+	background:#fff;
+	}
+.div2{
+	width:342px;
+	height:700px;
+	
+	background:#AE3739;
+	}
+.div3{
+	width:342px;
+	height:700px;
+	background:#1F26AD;
+	
+	}
+#div span{
+	cursor:pointer;
+	}
+#div span:hover{color: #1E6EC3!important;}
+/*lisss*/
+.dangeguangchang001{width: 1200px;margin: 0 auto;overflow: hidden;padding-top: 20px;background-color: #fff;border-top: 1px solid rgb(221, 221, 221);}
+.lisss{margin: 0;padding: 0px;width: 344px;float: left;height: 738px;position: relative;background:#fff;border: 1px #BCBCBC solid;}
+.no00{position: relative;width: 24px;height:24px;text-align: center;float: left;}
+.no00 span{position: absolute;top:14%;left:5%;width: 24px;height: 24px;color: #fff;overflow: hidden;}
+.no01{float: left;margin-left:20px;line-height: 24px;font-size: 16px;}
+.tile{margin-left: 20px;padding-top: 20px;width: 342px;overflow: hidden;margin-bottom: 16px;}
+.mianji,.suoshuleixing{float: left;}
+.suoshushangquan,.mianji,.suoshuleixing,.keliuliang,.dizhi{margin-left: 20px;margin-top: 6px;font-size: 14px;}
+.suoshuleixing{margin-left: 60px;}
+.dizhi{margin-bottom: 16px;}
+.div1 li{border-bottom: 1px solid #bcbcbc;height: 175px;}
+
+/*单个城市分页*/
+.box { width: 1200px;height: 800px;border: 1px solid #ccc;border-radius: 5px;margin: 0 autooverflow: hidden;}
+        
+.tab-left {width: 344px;height: 800px;float: left;overflow: hidden;border-right: 1px solid #ccc;}
+        
+.tab-left-top {width: 343px;height: 770px;overflow: hidden;}
+        
+.tab-left-top a {text-decoration: none;color: #000;}
+
+.tab-left-xt {width: 344px;height: 153px;border-top: 1px solid #ccc;text-align: center;cursor: pointer;transition: margin-top 0.5s;-webkit-transition: margin-top 0.5s;/* Safari */}
+        
+.tab-left-bottom {width: 344px;height: 30px;text-align: center;line-height: 30px;border-top: 1px solid #ccc;}
+        
+.tab-left-bottom span {cursor: pointer;}
+        
+.tab-right {height: 800px;/*float: left;*//*overflow: hidden;*/}
+        
+.tab-right-box {width: 634px;height: 798px;text-align: center;line-height: 800px;/*display: none;*/}
+        
+.page {display: none;}
+        
+.page.active {display: block;}

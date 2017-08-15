@@ -1,0 +1,36 @@
+@charset "UTF-8";
+/* CSS Document */
+/*重置*/
+*{padding: 0;margin:0;list-style:none;}
+body{list-style:none;font-size:12px;color:#555555;background-color:#f0f0f0!important;}
+img{ display:block;border:none;}
+a{display:inline-block;text-decoration:none;}
+input{border:none;}
+dl,dt,dd,li{ text-decoration:none;}
+/*title*/
+.nav_001 .logo{height: 100px;width: 160px;overflow: hidden;float: left;padding-right:15px;margin-top:8px;}
+.nav_001 .icon-haoma{float: left;line-height:40px;font-size:13px;color:#ffffff;font-weight: bold;margin-left: 10px;}
+.navbox{height:40px;z-index:9;position: relative; margin:auto;background:#554b4a;filter:alpha(opacity=90);-moz-opacity:0.90;opacity:0.90;font-family:'微软雅黑';}
+.nav_001{width:1002px;margin:0 auto;height:40px; list-style:none;}
+.nav_001 li{float:left;height:40px;position:relative; list-style:none;}
+.nav_001 .nei{margin-left: 260px;}
+.nav_001 li .last{background:none;}
+.nav_001 li a{text-decoration:none;}
+.nav_001 li a span{float:left;display:block;line-height:40px;font-size:14px;color:#ffffff;cursor:pointer;width:96px;text-align:center; }
+.mj_hover_menu{text-decoration:none; width:96px; background:url(../styles/images/menu_hover.jpg); height:40px;}
+.nav_001 li.selected .submenu{display:block;}
+.nav_001 li .submenu{display: none; position:absolute;top:40px;left:-9px;}
+.nav_001 li .submenu li{float:none;padding:0;background:none;height:auto;border-bottom:dotted 0px #BEBEBE;}
+.mj_menu_pro_bg{width:auto;background:#554b4a;margin-left: 10px;}
+.mj_menu_pro_main{width:94px; padding-top:12px;margin-left: 10px;}
+.mj_menu_pro_li{ float:left;}
+.mj_menu_li_txt{line-height:22px; font-size:12px; color:#242424;margin-bottom: 10px;}
+.mj_menu_li_txt font{font-size:14px; color:#bb1721;}
+.mj_menu_li_txt a{color:#fff; text-decoration:none;}
+.mj_menu_li_txt a:hover{color:#DC3033; text-decoration:underline;font-weight: bolder;}
+
+.mj_menu_news_bg{width:480px; height:185px; background:url(../images/menu_news_bg.png) no-repeat;}
+.mj_menu_news_main{width:440px; margin:auto; padding-top:12px;}
+.nav_001 .title_right{float: right;}
+.nav_001 .title_right a{float: left;line-height:40px;font-size:12px;color:#F1F1F1;cursor:pointer;}
+.nav_001 .title_right span{float: left;line-height:40px;font-size:18px;color:#959595;margin: 0 10px;}

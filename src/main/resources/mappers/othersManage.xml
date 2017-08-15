@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.OthersManage">
+  <resultMap id="BaseResultMap" type="com.news.entity.OthersManage">
+    <id column="manage_id" jdbcType="INTEGER" property="manageId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
+    <result column="operatorId" jdbcType="INTEGER" property="operatorId" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="source" jdbcType="VARCHAR" property="source" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  
+  <sql id="Base_Column_List">
+    manage_id, title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source
+  </sql>
+  
+  <!--查询列参数  -->
+	<sql id="queryMap">
+	
+	  <if test="title != null">
+         and title = #{title,jdbcType=VARCHAR}
+      </if>
+      <if test="subtitle != null">
+         and subtitle = #{subtitle,jdbcType=VARCHAR}
+      </if>
+      <if test="content != null">
+        and content = #{content,jdbcType=VARCHAR}
+      </if>
+      <if test="operator != null">
+        and operator = #{operator,jdbcType=VARCHAR}
+      </if>
+      <if test="operatorId != null">
+        and operatorId = #{operatorId,jdbcType=INTEGER}
+      </if>
+      <if test="comment != null">
+        and comment = #{comment,jdbcType=VARCHAR}
+      </if>
+      <if test="source != null">
+        and source = #{source,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        and type = #{type,jdbcType=INTEGER}
+      </if>
+      
+      <if test="createTime != null">
+        and create_time >= #{updateTime,jdbcType=DATE}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=VARCHAR}
+      </if>
+		
+    </sql>
+    
+    <sql id="queryMap2">
+	
+	 <include refid="queryMap" />
+      <if test="startDate != null">
+        and update_time >= #{startDate,jdbcType=VARCHAR}
+      </if>
+      <if test="endDate != null">
+      <![CDATA[
+			and update_time <= #{endDate,jdbcType=VARCHAR}
+		]]>
+      </if>
+		
+    </sql>
+  
+  
+  <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tb_others_manage
+    where manage_id = #{manageId,jdbcType=INTEGER}
+  </select>
+  
+  
+   <!-- 总记录数 -->
+    <select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_others_manage
+		where 1 = 1
+		<include refid="queryMap"/>
+		order by manage_id desc
+	</select>
+	<!-- 查询列表 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_others_manage
+		where  1 = 1
+		<include refid="queryMap2"/>
+		order by manage_id desc
+		limit   #{startIndex,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+	<!--查询一个  -->
+	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_others_manage
+		where manage_id = #{manageId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="findByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_others_manage
+		where title = #{title,jdbcType=VARCHAR}
+	</select>
+  
+  
+  <delete id="delete" parameterType="java.lang.Integer">
+    delete from tb_others_manage
+    where manage_id = #{manageId,jdbcType=INTEGER}
+  </delete>
+  
+  <update id="update" parameterType="OthersManage">
+    update tb_others_manage
+    <set>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        subtitle = #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null">
+        operatorId = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="operator != null">
+        operator = #{operator,jdbcType=VARCHAR},
+      </if>
+       <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="source != null">
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      
+    </set>
+    where manage_id = #{manageId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <insert id="insert" parameterType="OthersManage" useGeneratedKeys="true" keyProperty="manageId">
+    insert into tb_others_manage (title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source)
+    values 
+     (#{title,jdbcType=VARCHAR}, 
+      #{subtitle,jdbcType=VARCHAR}, 
+      #{operatorId,jdbcType=INTEGER},
+      #{comment,jdbcType=VARCHAR},
+      #{content,jdbcType=VARCHAR}, 
+      #{operator,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=DATE},
+      #{updateTime,jdbcType=DATE},
+      #{source,jdbcType=VARCHAR})
+  </insert>
+  
+  
+  <insert id="insertSelective" parameterType="OthersManage">
+    insert into tb_others_manage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="manageId != null">
+        manage_id,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="subtitle != null">
+        subtitle,
+      </if>
+      <if test="imageId != null">
+        image_id,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="manageId != null">
+        #{manageId,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subtitle != null">
+        #{subtitle,jdbcType=VARCHAR},
+      </if>
+      <if test="imageId != null">
+        #{imageId,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  
+    <!-- 查询所有 -->
+	<select id="findListAllWithMap" parameterType="map"  resultMap="BaseResultMap">
+		select
+	    <include refid="Base_Column_List" />
+		from tb_others_manage
+		where 1=1
+		<include refid="queryMap"/>
+		order by manage_id asc
+	</select>
+  
+  
+  
+</mapper>

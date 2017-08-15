@@ -1,0 +1,174 @@
+{
+    "ok": true,
+    "address": [{
+            "spaceName": "北京通州万达广场",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+        },
+        {
+            "spaceName": "北京延庆万达广场",
+            "businessCircle": "AAA",
+            "businessArea": "212㎡",
+            "type": "类型2",
+            "traffic":"12000",
+            "address":"北京市延庆"
+
+        },
+        {
+            "spaceName": "北京朝阳万达广场",
+            "businessCircle": "BBB",
+            "businessArea": "121㎡",
+            "type": "类型3",
+            "traffic":"20300",
+            "address":"北京市朝阳区"
+
+        },
+        {
+            "spaceName": "北京海淀万达广场",
+            "businessCircle": "CCC",
+            "businessArea": "144㎡",
+            "type": "类型4",
+            "traffic":"30000",
+            "address":"北京市海淀区"
+
+        },
+        {
+            "spaceName": "北京昌平万达广场",
+            "businessCircle": "DDD",
+            "businessArea": "122㎡",
+            "type": "类型5",
+            "traffic":"30000",
+            "address":"北京市昌平区"
+        },
+        {
+            "spaceName": "北京密云万达广场",
+            "businessCircle": "EEE",
+            "businessArea": "322㎡",
+            "type": "类型6",
+            "traffic":"11000",
+            "address":"北京市密云"
+
+        },
+        {
+            "spaceName": "北京东城区万达广场",
+            "businessCircle": "FFF",
+            "businessArea": "122㎡",
+            "type": "类型7",
+            "traffic":"50000",
+            "address":"北京市东城区"
+
+        },
+        {
+            "spaceName": "北京通州万达广场1",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场2",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场3",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场4",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场5",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场6",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场7",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场8",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场9",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场10",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场11",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        },
+        {
+            "spaceName": "北京通州万达广场12",
+            "businessCircle": "CBD",
+            "businessArea": "222㎡",
+            "type": "类型1",
+            "traffic":"10000",
+            "address":"北京市通州区五棵树"
+
+        }
+    ]
+
+}

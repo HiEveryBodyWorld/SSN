@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sqlmap.UploadImages">
+	<!-- 全部列 -->
+	<resultMap id="BaseResultMap" type="UploadImages" >
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="upload_id" property="uploadId" jdbcType="INTEGER" />
+		<result column="image_id" property="imageId" jdbcType="INTEGER" />
+	</resultMap>
+	<!--查询全部列  -->
+	<sql id="Base_Column_List">
+		id,
+		upload_id,
+		image_id
+	</sql>
+	<!-- 插入 -->
+	<insert id="insert" parameterType="Images"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_upload_images (<include refid="Base_Column_List" />) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{uploadId,jdbcType=INTEGER}, 
+	      #{imageId,jdbcType=INTEGER}
+      	)
+	</insert>
+</mapper>

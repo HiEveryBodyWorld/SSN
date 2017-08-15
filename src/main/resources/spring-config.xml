@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd ">
+
+	<!-- 注解生效 -->
+	<context:annotation-config />
+	<!-- 注解扫描目录 -->
+	<context:component-scan base-package="com.news" />
+	<!-- AOP自动代理 -->
+	<aop:aspectj-autoproxy />
+	<!-- SpringMVC默认注册DefaultAnnotationHandlerMapping与AnnotationMethodHandlerAdapter -->
+	<mvc:annotation-driven />
+
+	<!-- 自定义拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.news.controller.ProcessTimeInterceptor" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/sys/**" />
+			<bean class="com.news.controller.SystemInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<!-- 加载配置 -->
+	<bean id="placeholderConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:sys-dev.properties</value>
+				<value>classpath:redis.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	
+	<!-- 页面前缀和后缀 -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<!-- 放行静态资源 -->
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+
+	<!-- 默认页 -->
+	<mvc:view-controller path="/" view-name="login" />
+
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="200000000" />
+		<property name="maxInMemorySize" value="600000000" />
+	</bean>
+
+	<import resource="classpath:spring-config-datasource.xml" />
+</beans>
