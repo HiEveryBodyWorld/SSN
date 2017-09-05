@@ -37,7 +37,7 @@
 	</sql>
 	<!-- 插入 -->
 	<insert id="insert" parameterType="ManageImages"  useGeneratedKeys="true" keyProperty="id">
-		insert into tb_manage_images (id,manage_id,image_id) values 
+		insert into tb_article_images (id,manage_id,image_id) values 
       	(
 	      #{id,jdbcType=INTEGER}, 
 	      #{manageId,jdbcType=INTEGER}, 
@@ -46,8 +46,8 @@
 	</insert>
 	
 	<select id="findUrlByManageId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select m.id,m.manage_id,m.image_id,o.manage_id as omanageId,o.title,o.subtitle,o.operatorId,o.operator,o.content,o.comment,o.type,o.source,o.status,o.create_time as
-    createTime,o.update_time as updateTime,i.url,i.id as did,i.name,i.isDel from tb_manage_images  m LEFT JOIN tb_others_manage o ON o.manage_id = m.manage_id LEFT JOIN tb_image_detail i on m.image_id = i.id
+    select m.id,m.manage_id,m.image_id,o.id as omanageId,o.title,o.subtitle,o.operatorId,o.operator,o.content,o.comment,o.type,o.source,o.status,o.create_time as
+    createTime,o.update_time as updateTime,i.url,i.id as did,i.name,i.isDel from tb_article_images  m LEFT JOIN tb_article o ON o.id = m.manage_id LEFT JOIN tb_image_detail i on m.image_id = i.id
     where m.manage_id = #{manageId,jdbcType=INTEGER} and i.isDel = 0;
   </select>
   

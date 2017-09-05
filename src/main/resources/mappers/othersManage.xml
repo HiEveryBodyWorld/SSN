@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sqlmap.OthersManage">
   <resultMap id="BaseResultMap" type="com.news.entity.OthersManage">
-    <id column="manage_id" jdbcType="INTEGER" property="manageId" />
+    <id column="id" jdbcType="INTEGER" property="manageId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="subtitle" jdbcType="VARCHAR" property="subtitle" />
     <result column="operatorId" jdbcType="INTEGER" property="operatorId" />
@@ -17,7 +17,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    manage_id, title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source
+    id, title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source
   </sql>
   
   <!--查询列参数  -->
@@ -75,52 +75,52 @@
   <select id="select" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from tb_others_manage
-    where manage_id = #{manageId,jdbcType=INTEGER}
+    from tb_article
+    where id = #{manageId,jdbcType=INTEGER}
   </select>
   
   
    <!-- 总记录数 -->
     <select id="findListCount" parameterType="map" resultType="int">
 		select count(1)
-		from tb_others_manage
+		from tb_article
 		where 1 = 1
 		<include refid="queryMap"/>
-		order by manage_id desc
+		order by id desc
 	</select>
 	<!-- 查询列表 -->
 	<select id="findList" parameterType="map" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from tb_others_manage
+		from tb_article
 		where  1 = 1
 		<include refid="queryMap2"/>
-		order by manage_id desc
+		order by id desc
 		limit   #{startIndex,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
 	</select>
 	<!--查询一个  -->
 	<select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from tb_others_manage
-		where manage_id = #{manageId,jdbcType=INTEGER}
+		from tb_article
+		where id = #{manageId,jdbcType=INTEGER}
 	</select>
 	
 	<select id="findByTitle" parameterType="java.lang.String" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
-		from tb_others_manage
+		from tb_article
 		where title = #{title,jdbcType=VARCHAR}
 	</select>
   
   
   <delete id="delete" parameterType="java.lang.Integer">
-    delete from tb_others_manage
-    where manage_id = #{manageId,jdbcType=INTEGER}
+    delete from tb_article
+    where id = #{manageId,jdbcType=INTEGER}
   </delete>
   
   <update id="update" parameterType="OthersManage">
-    update tb_others_manage
+    update tb_article
     <set>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
@@ -159,12 +159,12 @@
       </if>
       
     </set>
-    where manage_id = #{manageId,jdbcType=INTEGER}
+    where id = #{manageId,jdbcType=INTEGER}
   </update>
   
   
   <insert id="insert" parameterType="OthersManage" useGeneratedKeys="true" keyProperty="manageId">
-    insert into tb_others_manage (title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source)
+    insert into tb_article (title, subtitle, operatorId, comment,content,operator,type, status,create_time,update_time,source)
     values 
      (#{title,jdbcType=VARCHAR}, 
       #{subtitle,jdbcType=VARCHAR}, 
@@ -181,10 +181,10 @@
   
   
   <insert id="insertSelective" parameterType="OthersManage">
-    insert into tb_others_manage
+    insert into tb_article
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="manageId != null">
-        manage_id,
+        id,
       </if>
       <if test="title != null">
         title,
@@ -234,10 +234,10 @@
 	<select id="findListAllWithMap" parameterType="map"  resultMap="BaseResultMap">
 		select
 	    <include refid="Base_Column_List" />
-		from tb_others_manage
+		from tb_article
 		where 1=1
 		<include refid="queryMap"/>
-		order by manage_id asc
+		order by id asc
 	</select>
   
   
