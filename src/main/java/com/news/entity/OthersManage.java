@@ -20,7 +20,7 @@ public class OthersManage {
     
     private String source;
 
-    private Integer type;
+    private String type;
 
     private Integer status;
     
@@ -97,15 +97,15 @@ public class OthersManage {
         this.comment = comment == null ? null : comment.trim();
     }
 
-    public Integer getType() {
-        return type;
-    }
+    public String getType() {
+		return type;
+	}
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+	public void setType(String type) {
+		this.type = type;
+	}
 
-    public Integer getStatus() {
+	public Integer getStatus() {
         return status;
     }
 

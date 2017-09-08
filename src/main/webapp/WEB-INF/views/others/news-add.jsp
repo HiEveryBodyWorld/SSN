@@ -72,6 +72,16 @@
 			</div>
 		</div>
 		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">新闻类型：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				 <select class="select" size="1" name="demo1" id="newType">
+				    <option value="" selected>通知</option>
+				    <option value="1">热销</option>
+				    <option value="2">新闻</option>
+				  </select>
+			</div>
+		</div>
+		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">图片上传：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<div class="uploader-list-container"> 
@@ -755,7 +765,7 @@ $(function(){
 		            content:text,
 		            comment:$("#comment").val(),
 		            source:$("#sources").val(),
-		            type:0,
+		            type:$("#newType").find("option:selected").text(),
 		            status:0
 		            
 		        };

@@ -25,7 +25,7 @@ public class ManageImages {
 
 	private String source;
 
-	private Integer type;
+	private String type;
 
 	private Integer status;
 
@@ -131,11 +131,11 @@ public class ManageImages {
 		this.source = source;
 	}
 
-	public Integer getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

@@ -10,7 +10,7 @@
     <result column="content" jdbcType="VARCHAR" property="content" />
     <result column="operator" jdbcType="VARCHAR" property="operator" />
     <result column="source" jdbcType="VARCHAR" property="source" />
-    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
     <result column="status" jdbcType="INTEGER" property="status" />

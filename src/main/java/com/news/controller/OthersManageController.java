@@ -211,15 +211,7 @@ public class OthersManageController extends BaseController{
     	 List<ManageImages> mis = manageImageService.findUrlByManageId(id);
     	 mv.addObject("others",om);
     	 mv.addObject("images", mis);
-    	 if(om.getType() == 0){
-    		 mv.setViewName("others/news-edit");
-    	 }else if(om.getType() == 1){
-    		 mv.setViewName("others/square-edit");
-    	 }else if(om.getType() == 2){
-    		 mv.setViewName("others/industrynew-edit");
-    	 }else if(om.getType() == 3){
-    		 mv.setViewName("others/culturalproject-edit");
-    	 }
+    	 mv.setViewName("others/news-edit");
          return mv;
     }
     @RequestMapping(value = "/others/toshow/{id}")
@@ -229,15 +221,8 @@ public class OthersManageController extends BaseController{
     	 List<ManageImages> mis = manageImageService.findUrlByManageId(id);
     	 mv.addObject("others",om);
     	 mv.addObject("images", mis);
-    	 if(om.getType() == 0){
-    		 mv.setViewName("others/news-show");
-    	 }else if(om.getType() == 1){
-    		 mv.setViewName("others/square-show");
-    	 }else if(om.getType() == 2){
-    		 mv.setViewName("others/industrynew-show");
-    	 }else if(om.getType() == 3){
-    		 mv.setViewName("others/culturalproject-show");
-    	 }
+    	 mv.setViewName("others/news-show");
+    	 
          return mv;
     }
     
@@ -253,7 +238,7 @@ public class OthersManageController extends BaseController{
     		@RequestParam(value="content",required = false) String content,
     		@RequestParam(value="comment",required = false) String comment,
     		@RequestParam(value="source",required = false) String source,
-    		@RequestParam(value="type",required = false) Integer type,
+    		@RequestParam(value="type",required = false) String type,
     		@RequestParam(value="status",required = false) Integer status
     		){
         ReturnInfo ri = new ReturnInfo();
