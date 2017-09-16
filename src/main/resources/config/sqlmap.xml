@@ -15,6 +15,7 @@
         <typeAlias type="com.news.entity.UploadImages" alias="UploadImages"/>
         <typeAlias type="com.news.entity.OthersManage" alias="OthersManage"/>
         <typeAlias type="com.news.entity.ManageImages" alias="ManageImages"/>
+        <typeAlias type="com.news.entity.Vision" alias="Vision"/>
     </typeAliases>
     <mappers>
         <mapper resource="mappers/admin.xml" />
@@ -27,5 +28,6 @@
         <mapper resource="mappers/uploadImages.xml" />
         <mapper resource="mappers/othersManage.xml" />
         <mapper resource="mappers/manageImages.xml" />
+        <mapper resource="mappers/Vision.xml" />
     </mappers>
 </configuration>

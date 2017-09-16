@@ -83,7 +83,8 @@
 			<c:forEach var="entity" items="${session_admin_login.permitResourcesList }" varStatus="status">
 				<dl >
 			    <dt><i class="Hui-iconfont">   
-			    <c:if test="${entity.name=='新闻'}">&#xe60c;</c:if>
+			    <c:if test="${entity.name=='新闻管理'}">&#xe60c;</c:if>
+			    <c:if test="${entity.name=='版本管理'}">&#xe70c;</c:if>
 			    <c:if test="${entity.name=='系统管理'}">&#xe62e;</c:if>
 			    </i>${entity.name}<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;
 			 

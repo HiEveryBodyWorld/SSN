@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.VisionMapper">
+  <resultMap id="BaseResultMap" type="com.news.entity.Vision">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vision_code" jdbcType="VARCHAR" property="visionCode" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="vision_time" jdbcType="TIMESTAMP" property="visionTime" />
+    <result column="describtion" jdbcType="VARCHAR" property="describtion" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, vision_code, url, vision_time,describtion
+  </sql>
+  
+  <!--查询列参数  -->
+	<sql id="queryMap">
+		<if test="startDate !=null and startDate != ''">
+    		<![CDATA[and DATE_FORMAT(vision_time, '%Y-%m-%d') >=  DATE_FORMAT(#{startDate}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="endDate !=null and endDate != ''">
+    		<![CDATA[and DATE_FORMAT(vision_time, '%Y-%m-%d') <=  DATE_FORMAT(#{endDate}, '%Y-%m-%d')]]>
+    	</if>
+    	<if test="visionCode != null">
+			and vision_code like concat('%', #{visionCode,jdbcType=VARCHAR}, '%')
+		</if>
+    </sql>
+     <!--更新列参数  -->
+    <sql id="updateMap">
+    	<if test="visionCode != null">
+			vision_code = #{visionCode,jdbcType=VARCHAR},
+		</if>
+		<if test="url != null">
+			url = #{url,jdbcType=VARCHAR},
+		</if>
+		<if test="describtion != null">
+			describtion = #{describtion,jdbcType=VARCHAR},
+		</if>
+    </sql>
+  <select id="findById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_vision
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+  <insert id="insert" parameterType="Vision"  useGeneratedKeys="true" keyProperty="id">
+		insert into tb_vision (<include refid="Base_Column_List" />) values 
+      	(
+	      #{id,jdbcType=INTEGER}, 
+	      #{visionCode,jdbcType=VARCHAR}, 
+	      #{url,jdbcType=VARCHAR},
+	      #{visionTime,jdbcType=TIMESTAMP},
+	      #{describtion,jdbcType=VARCHAR}
+      	)
+	</insert>
+	<select id="findListCount" parameterType="map" resultType="int">
+		select count(1)
+		from tb_vision
+		where 1 = 1
+		<include refid="queryMap"/>
+		order by vision_time asc
+	</select>
+	<!-- 查询列表 -->
+	<select id="findList" parameterType="map" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_vision
+		where  1 = 1
+		<include refid="queryMap"/>
+		order by vision_time asc
+		limit   #{startIndex,jdbcType=INTEGER},#{rows,jdbcType=INTEGER}
+	</select>
+	<update id="update" parameterType="Vision">
+		update tb_vision
+	    <set>
+	      <include refid="updateMap"/>
+	    </set>
+	    	where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+</mapper>
