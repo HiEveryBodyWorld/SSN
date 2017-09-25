@@ -50,7 +50,7 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">新闻副标题：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>新闻副标题：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="articletitle2" name="articletitle2">
 			</div>
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">文章来源：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>文章来源：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<input type="text" class="input-text" value="" placeholder="" id="sources" name="sources">
 			</div>

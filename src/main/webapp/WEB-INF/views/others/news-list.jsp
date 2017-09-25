@@ -31,16 +31,37 @@
 <![endif]-->
 <title>资讯列表</title>
 </head>
+<style>
+*{margin:0;padding:0;list-style:none;}
+body{font-size:14px;}
+
+
+.nav{width:200px;height:30px;margin:20px auto;}
+.nav p{display:block;padding-left:10px;line-height:30px;border:1px solid #CCC;}
+.set{background:url(images/btn_2.png) 165px 10px no-repeat;}
+.select{background:url(images/btn_1.png) 165px 10px no-repeat;}
+.new{width:198px;position:absolute;border:1px solid #CCC;display:none;}
+.nav ul li{line-height:30px;padding-left:10px;}
+.nav ul li:hover{background:#CCC;color:#FFF;}
+</style>
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 资讯管理 <span class="c-gray en">&gt;</span> 资讯列表 <a class="btn btn-success radius r" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="page-container">
 <form id="list_form" action="/sys/news/tolist" method="post">
 	<div class="text-c">
+			新闻类型：
+				 <select  class="nav" name="status" id="newType">
+				    <option value="" selected>状态</option>
+				    <option value="1">上架</option>
+				    <option value="0">下架</option>
+				  </select>
 	 	日期范围：
 		<input name="startDate" type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
 		-
 		<input name="endDate" type="text" onfocus="WdatePicker({ minDate:'#F{$dp.$D(\'logmin\')}',maxDate:'%y-%M-%d' })" id="logmax" class="input-text Wdate" style="width:120px;">
 		<input type="text" name="title" id="" placeholder=" 新闻名称" style="width:250px" class="input-text">
+		
+		
 		<button name="search_news" id="search_news" class="btn btn-success" type="submit"><i class="Hui-iconfont">&#xe665;</i> 搜新闻</button>
 	</div>
 </form>
