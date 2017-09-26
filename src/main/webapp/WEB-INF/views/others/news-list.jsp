@@ -50,10 +50,10 @@ body{font-size:14px;}
 <form id="list_form" action="/sys/news/tolist" method="post">
 	<div class="text-c">
 			新闻类型：
-				 <select  class="nav" name="status" id="newType">
-				    <option value="" selected>状态</option>
-				    <option value="1">上架</option>
-				    <option value="0">下架</option>
+				 <select  class="nav" name="status" id="newType" name="status">
+				    <option value="2" selected>全部</option>
+				    <option value="1">已经发布</option>
+				    <option value="0">未发布</option>
 				  </select>
 	 	日期范围：
 		<input name="startDate" type="text" onfocus="WdatePicker({ maxDate:'#F{$dp.$D(\'logmax\')||\'%y-%M-%d\'}' })" id="logmin" class="input-text Wdate" style="width:120px;">
@@ -73,7 +73,7 @@ body{font-size:14px;}
 					<th width="80">ID</th>
 					<th>标题</th>
 					<th width="80">副标题</th>
-					<th width="120">更新时间</th>
+					<th width="120">创建时间</th>
 					<th width="60">发布状态</th>
 					<th width="120">操作</th>
 				</tr>
@@ -84,7 +84,7 @@ body{font-size:14px;}
 					<td>${vs.index+1}</td>
 					<td class="text-l"><u style="cursor:pointer" class="text-primary" data-href="/sys/others/toshow/+${newa.manageId}" onclick="Hui_admin_tab(this)" href="javascript:;" data-title="查看">${newa.title}</u></td>
 					<td>${newa.subtitle}</td>
-					<td><fmt:formatDate value="${newa.updateTime}"
+					<td><fmt:formatDate value="${newa.createTime}"
 									pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					
 					<td class="td-status">

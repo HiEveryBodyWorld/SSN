@@ -47,7 +47,6 @@ public class OthersManageController extends BaseController{
 		
 		ModelAndView mv = new ModelAndView();
         HashMap<String, Object> map = this.getQueryMap();
-        map.put("type", 0);
         WebPage<OthersManage> page = othersManageService.findPage(map) ;
         mv.addObject("news",page);
         mv.setViewName("others/news-list");
@@ -143,6 +142,9 @@ public class OthersManageController extends BaseController{
         }
         if (StringUtils.isNotBlank(request.getParameter("title"))) {
             map.put("title", request.getParameter("title"));
+        }
+        if (StringUtils.isNotBlank(request.getParameter("status")) && !request.getParameter("status").equals("2")) {
+            map.put("status", request.getParameter("status"));
         }
         
         return map;

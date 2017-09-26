@@ -346,7 +346,7 @@
                 })(),
             // WebUploader实例
                 uploader,
-                actionUrl = "http://localhost:8081/sys/others/uploadup",
+                actionUrl = "http://47.95.32.187:8080/sys/others/uploadup",
                 acceptExtensions = (editor.getOpt('imageAllowFiles') || []).join('').replace(/\./g, ',').replace(/^[,]/, ''),
                 imageMaxSize = editor.getOpt('imageMaxSize'),
                 imageCompressBorder = editor.getOpt('imageCompressBorder');

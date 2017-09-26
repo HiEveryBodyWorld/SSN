@@ -23,9 +23,6 @@
   <!--查询列参数  -->
 	<sql id="queryMap">
 	
-	  <if test="title != null">
-         and title = #{title,jdbcType=VARCHAR}
-      </if>
       <if test="subtitle != null">
          and subtitle = #{subtitle,jdbcType=VARCHAR}
       </if>
@@ -59,13 +56,22 @@
     
     <sql id="queryMap2">
 	
-	 <include refid="queryMap" />
       <if test="startDate != null">
-        and update_time >= #{startDate,jdbcType=VARCHAR}
+        	and create_time >= #{startDate,jdbcType=VARCHAR}
       </if>
       <if test="endDate != null">
       <![CDATA[
-			and update_time <= #{endDate,jdbcType=VARCHAR}
+			and create_time <= #{endDate,jdbcType=VARCHAR}
+		]]>
+      </if>
+      <if test="title != null">
+      <![CDATA[
+			and title like concat(concat('%',#{title,jdbcType=VARCHAR}),'%')
+		]]>
+		</if>
+      <if test="status!=null">
+       <![CDATA[
+			and status = #{status,jdbcType=VARCHAR}
 		]]>
       </if>
 		
@@ -174,8 +180,8 @@
       #{operator,jdbcType=VARCHAR}, 
       #{type,jdbcType=INTEGER}, 
       #{status,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=DATE},
-      #{updateTime,jdbcType=DATE},
+      #{createTime,jdbcType=TIMESTAMP},
+      #{updateTime,jdbcType=TIMESTAMP},
       #{source,jdbcType=VARCHAR})
   </insert>
   
