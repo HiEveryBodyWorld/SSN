@@ -11,7 +11,7 @@
 		</commentGenerator>
 		<!--数据库连接的信息：驱动类、连接地址、用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://60.205.224.81:3306/space?characterEncoding=utf-8"
+			connectionURL="jdbc:mysql://192.168.3.3:3306/space?characterEncoding=utf-8"
 			userId="root" password="123456">
 		</jdbcConnection>
 
